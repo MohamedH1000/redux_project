@@ -5,7 +5,6 @@ import './index.css';
 const App = () => {
   return (
     <main className='main-class'>
-        <Counter />
     </main>
   )
 }
