@@ -1,9 +1,15 @@
-.main-class {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+.main-app {
+    background-color: rgb(104, 90, 90);
+    color: white;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    top: 50%;
-    right: 50%;
+    padding: 20px;
 }
