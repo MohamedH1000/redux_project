@@ -12,4 +12,4 @@ const PostAuthor = ({ userId }) => {
   )
 }
 
-export default PostAuthor
+export default PostAuthor;

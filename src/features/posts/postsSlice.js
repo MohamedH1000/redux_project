@@ -13,7 +13,7 @@ const initialState = {
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async() => {
   try {
     const response = await axios.get(POSTS_URL)
-    return [...response.data];
+    return response.data;
   } catch (error) {
     return error.message;
   }
@@ -72,7 +72,7 @@ const postSlice = createSlice({
         state.status = 'succeeded';
         let min = 1;
         const loadedPosts = action.payload.map(post => {
-          post.data = sub(new Date(), {minutes : min++}).toISOString()
+          post.date = sub(new Date(), {minutes : min++}).toISOString()
           post.reactions = {
             thumbsup: 0,
             wow: 0,
@@ -91,7 +91,7 @@ const postSlice = createSlice({
       })
       .addCase(addNewPost.fulfilled, (state, action) => {
         action.payload.userId = Number(action.payload.userId)
-        action.payload.data = new Date().toISOString();
+        action.payload.date = new Date().toISOString();
         action.payload.reactions = {
           thumbsup: 0,
           wow: 0,
@@ -110,5 +110,8 @@ export const { postAdded, reactionAdded } = postSlice.actions;
 export const selectAllPosts = (state) => state.posts.posts;
 export const getPostStatus = (state) => state.posts.status;
 export const getPostError = (state) => state.posts.error;
+
+export const selectPostById = (state, postId) => 
+  state.posts.posts.find(post => post.id === postId);
 
 export default postSlice.reducer;

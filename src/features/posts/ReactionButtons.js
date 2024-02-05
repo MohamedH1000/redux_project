@@ -27,7 +27,7 @@ const ReactionButtons = ({ post }) => {
                     cursor:'pointer'
                 }}
             >
-                {emoji} {post.reactions[name]}
+                &nbsp;&nbsp;{emoji} &nbsp;{post.reactions[name]}
             </button>
         )
     })

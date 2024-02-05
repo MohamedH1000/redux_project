@@ -26,6 +26,7 @@ const AddPostForm = () => {
     const onContentChanged = e => setContent(e.target.value);
     const onAuthorChanged = e => setUserId(e.target.value);
 
+    const canSave = [title, content, userId].every(Boolean) && addRequestStatus === 'idle';
 
     const onSavePostClicked = () => {
         if (canSave) {
@@ -44,8 +45,6 @@ const AddPostForm = () => {
         }
     }
 
-    const canSave = [title, content, userId].every(Boolean) && addRequestStatus === 'idle';
-
     const usersOptions = users.map(user => (
         <MenuItem key={user.id} value={user.id}>
             {user.name}
@@ -53,7 +52,7 @@ const AddPostForm = () => {
     ))
 
   return (
-    <section className="form-container">
+    <section className="form-container" style={{marginTop:'50px'}}>
         <h2 style={{margin:'10px'}}>Add a new Post</h2>
         <form className="form-structure">
             <label htmlFor="postTitle" >Post Title:</label>
