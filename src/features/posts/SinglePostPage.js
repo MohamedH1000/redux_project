@@ -15,7 +15,9 @@ const SinglePostPage = () => {
 
     if (!post) {
         return (
-            <section>
+            <section style={{
+                marginTop:'50px'
+            }}>
                 <h2>Post Not Found</h2>
             </section>
         )
@@ -27,8 +29,6 @@ const SinglePostPage = () => {
                 display:'flex',
                 justifyContent:'center',
                 alignItems:'center',
-                position:'relative',
-                bottom:'120px'
                 }}>
                 <article className="post_structure">
                     <h2 style={{marginBottom:'10px'}}>{post.title}</h2>
@@ -42,8 +42,12 @@ const SinglePostPage = () => {
                       flexWrap:'wrap',
                       gap:'10px'
                     }}>
-                        <Link to={`/post/edit/${post.id}`}>Edit Post</Link>
-                        <PostAuthor postId={post.userId}/>
+                        <Link to={`/post/edit/${post.id}`} style={{
+                            textDecoration:'none',
+                            color:'white',
+                            fontWeight:'bold'
+                        }}>Edit Post</Link>
+                        <PostAuthor userId={post.userId}/>
                         <TimeAgo timestamp={post.date}/>
                     </p>
                     <ReactionButtons post={post}/>

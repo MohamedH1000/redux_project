@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectPostById, updatePost } from './postsSlice';
+import { selectPostById, updatePost, deletePost } from './postsSlice';
 import { useParams, useNavigate } from "react-router-dom";
 
 import { selectAllUsers } from "../users/usersSlice";
@@ -63,8 +63,25 @@ const EditPostForm = () => {
         </MenuItem>
     ))
 
+    const onDeletePostClicked = () => {
+        try {
+            setRequestStatus('pending')
+            dispatch(deletePost({ id: post.id })).unwrap()
+
+            setTitle('')
+            setContent('')
+            setUserId('')
+            navigate('/')
+        } catch (error) {
+            console.error('Failed to delete the post', error)
+        } finally {
+            setRequestStatus('idle')
+        }
+    }
     return (
-        <section>
+        <section style={{
+            marginTop: '100px'
+        }}>
             <h2>Edit Post</h2>
             <form className="form-structure">
             <label htmlFor="postTitle" >Post Title:</label>
@@ -112,20 +129,33 @@ const EditPostForm = () => {
                 style={{
                     width:'350px',
                     margin:'5px',
-                    padding:'10px'
+                    padding:'10px',
+                    height:'150px'
                 }}
             />
             <Button 
                 type="button"
                 onClick={onSavePostClicked}
                 variant="contained"
-                style={{margin:'10px 0 20px 0', 
+                style={{margin:'10px 0 15px 0', 
                         fontFamily:'Georgia', 
                         textTransform:'none',
                         width:'350px',
                     }}
                 disabled={!canSave}
                 >Save Post</Button>
+            <Button 
+            type="button"
+            onClick={onDeletePostClicked}
+            variant="contained"
+            color="error"
+            style={{margin:'0 0 0 0', 
+                    fontFamily:'Georgia', 
+                    textTransform:'none',
+                    width:'350px',
+                }}
+            disabled={!canSave}
+            >Delete Post</Button>
         </form>
         </section>
     )

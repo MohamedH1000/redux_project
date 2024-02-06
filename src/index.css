@@ -6,7 +6,6 @@
 }
 
 .main-app {
-    background-color: rgb(104, 90, 90);
     color: white;
     display: flex;
     flex-direction: column;

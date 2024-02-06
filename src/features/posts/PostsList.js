@@ -1,23 +1,15 @@
-import { selectAllPosts, getPostError, getPostStatus, fetchPosts } from "./postsSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { selectAllPosts, getPostError, getPostStatus } from "./postsSlice";
+import { useSelector } from "react-redux";
 import './postList.css';
-import { useEffect } from "react";
 import PostsExcerpts from "./PostsExcerpts";
 import CircularProgress from '@mui/material/CircularProgress';
 
 const PostsList = () => {
-    const dispatch = useDispatch();
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const posts = useSelector(selectAllPosts)
     const postStatus = useSelector(getPostStatus)
     const error = useSelector(getPostError)
-
-    useEffect(() => {
-        if (postStatus === 'idle') {
-          dispatch(fetchPosts())
-        }
-    }, [postStatus, dispatch])
 
       let content;
       if (postStatus === 'loading') {

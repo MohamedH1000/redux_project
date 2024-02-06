@@ -9,10 +9,12 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import { useNavigate } from 'react-router-dom';
 
 
 const AddPostForm = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [title, setTitle] = useState('')
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -29,6 +31,7 @@ const AddPostForm = () => {
     const canSave = [title, content, userId].every(Boolean) && addRequestStatus === 'idle';
 
     const onSavePostClicked = () => {
+        navigate('/');
         if (canSave) {
             try {
                 setAddRequestStatus('pending')
